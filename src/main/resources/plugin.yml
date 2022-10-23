@@ -1,0 +1,12 @@
+name: Warpstarvalcity
+version: '${project.version}'
+main: ch.tom.tcodes.warpstarvalcity.WarpStarvalcity
+api-version: 1.16
+authors: [ T0myyde ]
+description: This is a Warp System für 𝗦𝗧𝗔𝗥𝗩𝗔𝗟𝗖𝗜𝗧𝗬
+
+commands:
+  delwarp:
+  setwarp:
+  warp:
+  warps:

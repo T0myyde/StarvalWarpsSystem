@@ -1,0 +1,9 @@
+messages:
+  prefix: "&7StarWarps &8&l| "
+  noPermissionMessage: "&cDu hast keine berechtigung"
+  wrongUseWarp: "&cBenutze bitte /warp <name>"
+  warpDoesNotExists: "&cDieser Warp Existiert nicht"
+  wrongUseWarps: "&cBenutze bitte /warps"
+  allWarps: "&7Dies sind alle Warps:"
+  prefixWarps: "&8&l| &a"
+  playerTeleport: "§aDu wurdest Teleportiert zu <warpName>"
