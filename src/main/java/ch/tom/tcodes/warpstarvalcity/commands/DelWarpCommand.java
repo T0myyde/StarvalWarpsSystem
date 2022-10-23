@@ -30,6 +30,7 @@ public class DelWarpCommand implements CommandExecutor {
                         plugin.getWarpConfig().set("warps."+args[0], null);
                         plugin.getWarpConfig().save(plugin.getFile());
                         player.sendMessage(plugin.getMessages().getPrefix() + "§aDu hast erfolgreich den Warp §e" + args[0] + " gelöscht");
+                        plugin.getCompletions().remove(args[0]);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

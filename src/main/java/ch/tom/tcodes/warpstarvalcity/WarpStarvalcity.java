@@ -5,6 +5,7 @@ import ch.tom.tcodes.warpstarvalcity.commands.SetWarpCommand;
 import ch.tom.tcodes.warpstarvalcity.commands.WarpCommand;
 import ch.tom.tcodes.warpstarvalcity.commands.WarpsCommand;
 import ch.tom.tcodes.warpstarvalcity.files.FileAPI;
+import ch.tom.tcodes.warpstarvalcity.tabcompleter.WarpCompleter;
 import ch.tom.tcodes.warpstarvalcity.utils.LocationManager;
 import ch.tom.tcodes.warpstarvalcity.utils.Messages;
 import org.bukkit.Bukkit;
@@ -14,8 +15,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-import javax.tools.JavaFileManager;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class WarpStarvalcity extends JavaPlugin {
 
@@ -23,6 +25,7 @@ public final class WarpStarvalcity extends JavaPlugin {
     private File file;
     private FileConfiguration warpConfig;
 
+    private List<String> completions;
     private FileAPI fileAPI;
 
     private Messages messages;
@@ -42,10 +45,17 @@ public final class WarpStarvalcity extends JavaPlugin {
         file = new File(instance.getDataFolder(), "warpLocations.yml");
         warpConfig = YamlConfiguration.loadConfiguration(file);
 
+        completions = new ArrayList<>();
+
+        locationManager.getAllLocations();
         getCommand("delwarp").setExecutor(new DelWarpCommand(this));
+        this.getCommand("delwarp").setTabCompleter(new WarpCompleter(this));
         getCommand("setwarp").setExecutor(new SetWarpCommand(this));
         getCommand("warp").setExecutor(new WarpCommand(this));
+        this.getCommand("warp").setTabCompleter(new WarpCompleter(this));
         getCommand("warps").setExecutor(new WarpsCommand(this));
+
+
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
     }
@@ -75,5 +85,9 @@ public final class WarpStarvalcity extends JavaPlugin {
 
     public FileAPI getFileAPI() {
         return fileAPI;
+    }
+
+    public List<String> getCompletions() {
+        return completions;
     }
 }

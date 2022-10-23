@@ -26,6 +26,7 @@ public class SetWarpCommand implements CommandExecutor {
               if (plugin.getWarpConfig().get("warps."+args[0]) == null) {
                   plugin.getLocationManager().addLocation(args[0], player);
                   player.sendMessage(plugin.getMessages().getPrefix() + "§5Du hast erfolgreich einen Warp erstellt. \n §7Name§8: " + args[0]);
+                  plugin.getCompletions().add(args[0]);
               } else {
                   player.sendMessage(plugin.getMessages().getPrefix() + "§cDiesen Warp gibt es bereits");
               }

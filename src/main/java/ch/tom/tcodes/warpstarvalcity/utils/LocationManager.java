@@ -60,9 +60,25 @@ public class LocationManager {
     public void listLocations(Player player) {
         File file = new File(plugin.getDataFolder(), "warpLocations.yml");
         YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-        player.sendMessage(plugin.getMessages().getConfigMessage("messages.allWarps"));
+
+        if (!cfg.getConfigurationSection("warps").getKeys(false).isEmpty()) {
+            player.sendMessage(plugin.getMessages().getConfigMessage("messages.allWarps"));
+            for (String locations : cfg.getConfigurationSection("warps").getKeys(false)) {
+                player.sendMessage(plugin.getMessages().getConfigMessageNoPrefix("messages.prefixWarps")+locations);
+            }
+        } else {
+            player.sendMessage(plugin.getMessages().getConfigMessage("messages.noWarps"));
+        }
+
+
+
+    }
+
+    public void getAllLocations() {
+        File file = new File(plugin.getDataFolder(), "warpLocations.yml");
+        YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
         for (String locations : cfg.getConfigurationSection("warps").getKeys(false)) {
-            player.sendMessage(plugin.getMessages().getConfigMessageNoPrefix("messages.prefixWarps")+locations);
+            plugin.getCompletions().add(locations);
         }
 
     }

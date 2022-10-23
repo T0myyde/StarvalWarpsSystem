@@ -7,3 +7,4 @@ messages:
   allWarps: "&7Dies sind alle Warps:"
   prefixWarps: "&8&l| &a"
   playerTeleport: "§aDu wurdest Teleportiert zu <warpName>"
+  noWarps: "&cEs gibt keine Warps!"
