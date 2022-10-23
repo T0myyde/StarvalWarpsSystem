@@ -1,3 +1,6 @@
+saveOption:
+  mysql: false
+  config: true
 messages:
   prefix: "&7StarWarps &8&l| "
   noPermissionMessage: "&cDu hast keine berechtigung"

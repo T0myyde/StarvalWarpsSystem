@@ -5,13 +5,13 @@ import ch.tom.tcodes.warpstarvalcity.commands.SetWarpCommand;
 import ch.tom.tcodes.warpstarvalcity.commands.WarpCommand;
 import ch.tom.tcodes.warpstarvalcity.commands.WarpsCommand;
 import ch.tom.tcodes.warpstarvalcity.files.FileAPI;
+import ch.tom.tcodes.warpstarvalcity.mysql.MySQL;
+import ch.tom.tcodes.warpstarvalcity.mysql.warps.WarpsService;
 import ch.tom.tcodes.warpstarvalcity.tabcompleter.WarpCompleter;
 import ch.tom.tcodes.warpstarvalcity.utils.LocationManager;
 import ch.tom.tcodes.warpstarvalcity.utils.Messages;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,29 +21,37 @@ import java.util.List;
 
 public final class WarpStarvalcity extends JavaPlugin {
 
-    private WarpStarvalcity instance;
-    private File file;
+    private static WarpStarvalcity instance;
+    private File warpFile;
     private FileConfiguration warpConfig;
 
+
     private List<String> completions;
-    private FileAPI fileAPI;
 
     private Messages messages;
 
+    private WarpsService warpsService;
+
     private LocationManager locationManager;
+
+    private MySQL mySQL;
+
     @Override
     public void onEnable() {
-      instance = this;
-      onInit(Bukkit.getPluginManager());
+        instance = this;
+        mySQL = new MySQL();
+        onInit();
     }
 
-    private void onInit(PluginManager pluginManager) {
+    private void onInit() {
+        mySQL.createTable();
         messages = new Messages(this);
         locationManager = new LocationManager(this);
-        FileAPI.select(this,file,warpConfig).create("warpLocations.yml", false);
+        warpsService = new WarpsService();
+        FileAPI.select(this, warpFile, warpConfig).create("warpLocations.yml", false);
 
-        file = new File(instance.getDataFolder(), "warpLocations.yml");
-        warpConfig = YamlConfiguration.loadConfiguration(file);
+        warpFile = new File(instance.getDataFolder(), "warpLocations.yml");
+        warpConfig = YamlConfiguration.loadConfiguration(warpFile);
 
         completions = new ArrayList<>();
 
@@ -76,18 +84,26 @@ public final class WarpStarvalcity extends JavaPlugin {
     @NotNull
     @Override
     public File getFile() {
-        return file;
+        return warpFile;
     }
 
     public LocationManager getLocationManager() {
         return locationManager;
     }
 
-    public FileAPI getFileAPI() {
-        return fileAPI;
-    }
-
     public List<String> getCompletions() {
         return completions;
+    }
+
+    public WarpsService getWarpsService() {
+        return warpsService;
+    }
+
+    public MySQL getMySQL() {
+        return mySQL;
+    }
+
+    public static WarpStarvalcity getInstance() {
+        return instance;
     }
 }

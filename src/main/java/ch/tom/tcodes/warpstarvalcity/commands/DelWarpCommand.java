@@ -25,17 +25,49 @@ public class DelWarpCommand implements CommandExecutor {
 
         if (player.hasPermission("warps.del") || player.hasPermission("warps.*")) {
             if (args.length == 1) {
-                if (plugin.getWarpConfig().get("warps."+args[0]) != null) {
-                    try {
-                        plugin.getWarpConfig().set("warps."+args[0], null);
-                        plugin.getWarpConfig().save(plugin.getFile());
+                if (plugin.getConfig().getBoolean("saveOption.mysql") && plugin.getConfig().getBoolean("saveOption.config")) {
+                    if (plugin.getWarpConfig().get("warps."+args[0]) != null) {
+                        try {
+                            plugin.getWarpConfig().set("warps." + args[0], null);
+                            plugin.getWarpConfig().save(plugin.getFile());
+                            plugin.getWarpsService().delete(plugin.getWarpsService().get(args[0]));
+                            plugin.getCompletions().remove(args[0]);
+                            player.sendMessage(plugin.getMessages().getPrefix() + "§aDu hast erfolgreich den Warp §e" + args[0] + " gelöscht");
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else if (plugin.getWarpsService().get(args[0]).getName() != null) {
+                        if (plugin.getWarpsService().get(args[0]).getName() != null) {
+                            plugin.getWarpsService().delete(plugin.getWarpsService().get(args[0]));
+                            player.sendMessage(plugin.getMessages().getPrefix() + "§aDu hast erfolgreich den Warp §e" + args[0] + " gelöscht");
+                            plugin.getCompletions().remove(args[0]);
+                        } else {
+                            player.sendMessage(plugin.getMessages().getPrefix() + "§cDer Warp mit dem Namen §e" + args[0] + " §cgibt es nicht!");
+                        }
+                    } else {
+                        player.sendMessage(plugin.getMessages().getPrefix() + "§cDer Warp mit dem Namen §e" + args[0] + " §cgibt es nicht!");
+                    }
+                } else if (plugin.getConfig().getBoolean("saveOption.mysql")) {
+                    if (plugin.getWarpsService().get(args[0]).getName() != null) {
+                        plugin.getWarpsService().delete(plugin.getWarpsService().get(args[0]));
                         player.sendMessage(plugin.getMessages().getPrefix() + "§aDu hast erfolgreich den Warp §e" + args[0] + " gelöscht");
                         plugin.getCompletions().remove(args[0]);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                    } else {
+                        player.sendMessage(plugin.getMessages().getPrefix() + "§cDer Warp mit dem Namen §e" + args[0] + " §cgibt es nicht!");
                     }
-                } else {
-                    player.sendMessage(plugin.getMessages().getPrefix() + "§cDer Warp mit dem Namen §e" + args[0] + " §cgibt es nicht!");
+                } else if (plugin.getConfig().getBoolean("saveOption.config")) {
+                    if (plugin.getWarpConfig().get("warps."+args[0]) != null) {
+                        try {
+                            plugin.getWarpConfig().set("warps." + args[0], null);
+                            plugin.getWarpConfig().save(plugin.getFile());
+                            plugin.getCompletions().remove(args[0]);
+                            player.sendMessage(plugin.getMessages().getPrefix() + "§aDu hast erfolgreich den Warp §e" + args[0] + " gelöscht");
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else {
+                        player.sendMessage(plugin.getMessages().getPrefix() + "§cDer Warp mit dem Namen §e" + args[0] + " §cgibt es nicht!");
+                    }
                 }
             } else {
                 player.sendMessage(plugin.getMessages().getPrefix() + "§cBitte benutze /delwarp <warpname>");
@@ -43,7 +75,6 @@ public class DelWarpCommand implements CommandExecutor {
         } else {
             player.sendMessage(plugin.getMessages().getConfigMessage("messages.noPermissionMessage"));
         }
-
 
 
         return false;
