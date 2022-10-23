@@ -1,28 +1,22 @@
-package ch.tom.tcodes.warpstarvalcity.utils;
+package ch.tom.tcodes.utils;
 
-import ch.tom.tcodes.warpstarvalcity.WarpStarvalcity;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
+import ch.tom.tcodes.WarpSystem;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class LocationManager {
 
-    private WarpStarvalcity plugin;
+    private WarpSystem plugin;
 
     public LocationManager() {
     }
 
-    public LocationManager(WarpStarvalcity plugin) {
+    public LocationManager(WarpSystem plugin) {
         this.plugin = plugin;
     }
 

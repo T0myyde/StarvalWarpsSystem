@@ -1,16 +1,15 @@
-package ch.tom.tcodes.warpstarvalcity.mysql.warps;
+package ch.tom.tcodes.mysql.warps;
 
-import ch.tom.tcodes.warpstarvalcity.WarpStarvalcity;
+import ch.tom.tcodes.WarpSystem;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class WarpsRepositorympl implements WarpsRepository {
 
-    private WarpStarvalcity plugin = WarpStarvalcity.getInstance();
+    private WarpSystem plugin = WarpSystem.getInstance();
 
     @Override
     public void create(Warps warps) {

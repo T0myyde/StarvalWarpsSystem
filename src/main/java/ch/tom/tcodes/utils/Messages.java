@@ -1,12 +1,12 @@
-package ch.tom.tcodes.warpstarvalcity.utils;
+package ch.tom.tcodes.utils;
 
-import ch.tom.tcodes.warpstarvalcity.WarpStarvalcity;
+import ch.tom.tcodes.WarpSystem;
 
 public class Messages {
 
-    private WarpStarvalcity plugin;
+    private WarpSystem plugin;
 
-    public Messages(WarpStarvalcity plugin) {
+    public Messages(WarpSystem plugin) {
         this.plugin = plugin;
     }
 

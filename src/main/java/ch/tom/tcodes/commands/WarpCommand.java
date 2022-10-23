@@ -1,7 +1,7 @@
-package ch.tom.tcodes.warpstarvalcity.commands;
+package ch.tom.tcodes.commands;
 
-import ch.tom.tcodes.warpstarvalcity.WarpStarvalcity;
-import ch.tom.tcodes.warpstarvalcity.mysql.warps.Warps;
+import ch.tom.tcodes.WarpSystem;
+import ch.tom.tcodes.mysql.warps.Warps;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class WarpCommand implements CommandExecutor {
 
-    private WarpStarvalcity plugin;
+    private WarpSystem plugin;
 
-    public WarpCommand(WarpStarvalcity plugin) {
+    public WarpCommand(WarpSystem plugin) {
         this.plugin = plugin;
     }
 

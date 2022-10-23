@@ -1,6 +1,6 @@
-package ch.tom.tcodes.warpstarvalcity.files;
+package ch.tom.tcodes.files;
 
-import ch.tom.tcodes.warpstarvalcity.WarpStarvalcity;
+import ch.tom.tcodes.WarpSystem;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -9,11 +9,11 @@ import java.io.IOException;
 
 public class UtilFile implements InterfaceFile{
 
-    private WarpStarvalcity plugin;
+    private WarpSystem plugin;
     private File file;
     private FileConfiguration fileConfiguration;
 
-    public UtilFile(WarpStarvalcity plugin, File file, FileConfiguration fileConfiguration) {
+    public UtilFile(WarpSystem plugin, File file, FileConfiguration fileConfiguration) {
         this.plugin = plugin;
         this.file = file;
         this.fileConfiguration = fileConfiguration;

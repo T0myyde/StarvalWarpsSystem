@@ -1,6 +1,6 @@
-package ch.tom.tcodes.warpstarvalcity.files;
+package ch.tom.tcodes.files;
 
-import ch.tom.tcodes.warpstarvalcity.WarpStarvalcity;
+import ch.tom.tcodes.WarpSystem;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -16,11 +16,11 @@ public class FileAPI {
     }
 
     public static class UtilFile implements InterfaceFile {
-        private WarpStarvalcity plugin;
+        private WarpSystem plugin;
         private File file;
         private FileConfiguration fileConfiguration;
 
-        public UtilFile(WarpStarvalcity plugin, File file, FileConfiguration fc) {
+        public UtilFile(WarpSystem plugin, File file, FileConfiguration fc) {
             this.plugin = plugin;
             this.file = file;
             this.fileConfiguration = fc;
@@ -81,7 +81,7 @@ public class FileAPI {
 
     private static UtilFile UF;
 
-    public static UtilFile select(WarpStarvalcity plugin, File f, FileConfiguration fc) {
+    public static UtilFile select(WarpSystem plugin, File f, FileConfiguration fc) {
         UF = new UtilFile(plugin, f, fc);
         return UF;
     }

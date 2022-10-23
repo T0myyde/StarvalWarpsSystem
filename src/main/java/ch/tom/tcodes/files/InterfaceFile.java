@@ -1,4 +1,4 @@
-package ch.tom.tcodes.warpstarvalcity.files;
+package ch.tom.tcodes.files;
 
 public interface InterfaceFile {
     void create(String filename, boolean getResourceFromFile);

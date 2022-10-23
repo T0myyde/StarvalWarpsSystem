@@ -2,7 +2,7 @@ saveOption:
   mysql: false
   config: true
 messages:
-  prefix: "&7StarWarps &8&l| "
+  prefix: "&7WarpSystem &8&l| "
   noPermissionMessage: "&cDu hast keine berechtigung"
   wrongUseWarp: "&cBenutze bitte /warp <name>"
   warpDoesNotExists: "&cDieser Warp Existiert nicht"

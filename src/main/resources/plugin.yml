@@ -1,12 +1,15 @@
 name: Warpstarvalcity
 version: '${project.version}'
-main: ch.tom.tcodes.warpstarvalcity.WarpStarvalcity
-api-version: 1.16
+main: ch.tom.tcodes.WarpSystem
 authors: [ T0myyde ]
-description: This is a Warp System für 𝗦𝗧𝗔𝗥𝗩𝗔𝗟𝗖𝗜𝗧𝗬
+description: Was a warp system for the server 𝗦𝗧𝗔𝗥𝗩𝗔𝗟𝗖𝗜𝗧𝗬
 
 commands:
   delwarp:
+    description: "Is used to delete a warp"
   setwarp:
+    description: "Is responsible for creating a warp"
   warp:
+    description: "Is responsible for the TP'n"
   warps:
+    description: "Is for displaying all warps"

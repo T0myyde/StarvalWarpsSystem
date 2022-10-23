@@ -1,4 +1,6 @@
-package ch.tom.tcodes.warpstarvalcity.mysql;
+package ch.tom.tcodes.mysql;
+
+import ch.tom.tcodes.WarpSystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,13 +10,16 @@ import java.util.Properties;
 public class MySQL {
 
     public Connection connection;
+
+    private WarpSystem plugin = WarpSystem.getInstance();
     public MySQL() {
         Properties properties = new Properties();
         try {
-            properties.put("user", "tcodesmc");
-            properties.put("password", "CM8#xmjP2eUxRxS");
+            properties.put("user", plugin.getSqlCfg().get("mysql.user"));
+            properties.put("password", plugin.getSqlCfg().get("mysql.password"));
             properties.put("autoReconnect", "true");
-            connection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/tcodesmc?characterEncoding=utf8", properties);
+            connection = DriverManager.getConnection("jdbc:mysql://"+plugin.getSqlCfg().get("mysql.host")+":"+plugin.getSqlCfg().get("mysql.port")+"/"+plugin.getSqlCfg().get("mysql.database")+"?characterEncoding=utf8", properties);
+            System.out.println("WarpSystem | MySQL Connected");
         }catch (Exception e) {
             e.printStackTrace();
         }

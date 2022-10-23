@@ -1,15 +1,16 @@
-package ch.tom.tcodes.warpstarvalcity;
+package ch.tom.tcodes;
 
-import ch.tom.tcodes.warpstarvalcity.commands.DelWarpCommand;
-import ch.tom.tcodes.warpstarvalcity.commands.SetWarpCommand;
-import ch.tom.tcodes.warpstarvalcity.commands.WarpCommand;
-import ch.tom.tcodes.warpstarvalcity.commands.WarpsCommand;
-import ch.tom.tcodes.warpstarvalcity.files.FileAPI;
-import ch.tom.tcodes.warpstarvalcity.mysql.MySQL;
-import ch.tom.tcodes.warpstarvalcity.mysql.warps.WarpsService;
-import ch.tom.tcodes.warpstarvalcity.tabcompleter.WarpCompleter;
-import ch.tom.tcodes.warpstarvalcity.utils.LocationManager;
-import ch.tom.tcodes.warpstarvalcity.utils.Messages;
+import ch.tom.tcodes.commands.DelWarpCommand;
+import ch.tom.tcodes.commands.SetWarpCommand;
+import ch.tom.tcodes.commands.WarpCommand;
+import ch.tom.tcodes.commands.WarpsCommand;
+import ch.tom.tcodes.files.FileAPI;
+import ch.tom.tcodes.files.SqlFile;
+import ch.tom.tcodes.mysql.MySQL;
+import ch.tom.tcodes.mysql.warps.WarpsService;
+import ch.tom.tcodes.tabcompleter.WarpCompleter;
+import ch.tom.tcodes.utils.LocationManager;
+import ch.tom.tcodes.utils.Messages;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,9 +20,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class WarpStarvalcity extends JavaPlugin {
+public final class WarpSystem extends JavaPlugin {
 
-    private static WarpStarvalcity instance;
+    private static WarpSystem instance;
     private File warpFile;
     private FileConfiguration warpConfig;
 
@@ -34,11 +35,16 @@ public final class WarpStarvalcity extends JavaPlugin {
 
     private LocationManager locationManager;
 
+    private SqlFile sqlFile;
+    private YamlConfiguration sqlCfg;
+
     private MySQL mySQL;
 
     @Override
     public void onEnable() {
         instance = this;
+        sqlFile = new SqlFile(this, "mysql.yml");
+        sqlCfg = YamlConfiguration.loadConfiguration(sqlFile.getFile());
         mySQL = new MySQL();
         onInit();
     }
@@ -103,7 +109,11 @@ public final class WarpStarvalcity extends JavaPlugin {
         return mySQL;
     }
 
-    public static WarpStarvalcity getInstance() {
+    public static WarpSystem getInstance() {
         return instance;
+    }
+
+    public YamlConfiguration getSqlCfg() {
+        return sqlCfg;
     }
 }

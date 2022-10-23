@@ -1,6 +1,6 @@
-package ch.tom.tcodes.warpstarvalcity.tabcompleter;
+package ch.tom.tcodes.tabcompleter;
 
-import ch.tom.tcodes.warpstarvalcity.WarpStarvalcity;
+import ch.tom.tcodes.WarpSystem;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -14,9 +14,9 @@ import java.util.List;
 
 public class WarpCompleter implements TabCompleter {
 
-    private WarpStarvalcity plugin;
+    private WarpSystem plugin;
 
-    public WarpCompleter(WarpStarvalcity plugin) {
+    public WarpCompleter(WarpSystem plugin) {
         this.plugin = plugin;
     }
 

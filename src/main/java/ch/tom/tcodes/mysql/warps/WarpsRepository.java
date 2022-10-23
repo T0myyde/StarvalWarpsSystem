@@ -1,4 +1,4 @@
-package ch.tom.tcodes.warpstarvalcity.mysql.warps;
+package ch.tom.tcodes.mysql.warps;
 
 import java.util.ArrayList;
 
